@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
+  #before_action :ensure_correct_user, only: [:edit, :update]
 
   def new
     @book = Book.new
@@ -8,7 +10,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user =@book.user
     @Book =Book.all
-    @books =Book.new
+    @book_new =Book.new
 
 
   end
