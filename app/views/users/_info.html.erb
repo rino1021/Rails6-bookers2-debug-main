@@ -8,7 +8,25 @@
 	  <th>introduction</th>
 	  <th><%= user.introduction %></th>
   </tr>
+  <tr>
+    <th>follows</th>
+    <th><%= link_to user.followings.count, user_followings_path(user) %></th>
+
+  </tr>
+  <tr>
+    <th>followers</th>
+    <th><%= link_to user.followers.count, user_followers_path(user) %></th>
+
+  </tr>
 </table>
+<div class='row'>
+  <% if user.follower?(current_user) %>
+            <p><%=link_to "フォロー外す", user_relationships_path(user.id),class: "btn btn-info btn-sm btn-block mb-3 フォロー外す", method: :delete %></p>
+        <% else %>
+            <p><%=link_to "フォローする", user_relationships_path(user.id),class: "btn btn-success btn-sm btn-block フォローする",method: :post %></p>
+        <% end %>
+</div>
+
 
 <div class='row'>
   <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
